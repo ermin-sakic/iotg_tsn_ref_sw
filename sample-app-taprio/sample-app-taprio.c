@@ -231,10 +231,11 @@ typedef struct {
  * The API for SO_TXTIME is the below struct and enum, which will be
  * provided by uapi/linux/net_tstamp.h in the near future.
  */
-struct example_sock_txtime {
+/*struct example_sock_txtime {
 	clockid_t clockid;
 	uint16_t flags;
 };
+*/
 
 typedef struct {
 	uint64_t offset;
@@ -242,7 +243,7 @@ typedef struct {
 	uint8_t num_packets;
 } tx_window;
 
-enum example_txtime_flags {
+/*enum example_txtime_flags {
 	example_SOF_TXTIME_DEADLINE_MODE = (1 << 0),
 	example_SOF_TXTIME_REPORT_ERRORS = (1 << 1),
 
@@ -250,6 +251,17 @@ enum example_txtime_flags {
 	example_SOF_TXTIME_FLAGS_MASK = (example_SOF_TXTIME_FLAGS_LAST - 1) |
 				 example_SOF_TXTIME_FLAGS_LAST
 };
+*/
+
+/*enum txtime_flags {
+	SOF_TXTIME_DEADLINE_MODE = (1 << 0),
+	SOF_TXTIME_REPORT_ERRORS = (1 << 1),
+
+	SOF_TXTIME_FLAGS_LAST = SOF_TXTIME_REPORT_ERRORS,
+	SOF_TXTIME_FLAGS_MASK = (SOF_TXTIME_FLAGS_LAST - 1) |
+				 SOF_TXTIME_FLAGS_LAST
+};
+*/
 
 /********** globals *************/
 
@@ -312,7 +324,8 @@ static int tx_window_offset = TX_WINDOW_OFFSET;
 static int use_so_txtime = 1;
 static int use_deadline_mode = 0;
 static int waketx_delay = TX_DELAY_DEFAULT;
-static struct example_sock_txtime sk_txtime;
+//static struct example_sock_txtime sk_txtime;
+static struct sock_txtime sk_txtime;
 
 /* Timer variables for window opening */
 static timer_t window_timer_id;
@@ -2112,13 +2125,15 @@ int main(int argc, char *argv[])
 			txDisplay = strtoul(optarg, NULL, 10);
 			break;
 		case 'D':
-			use_deadline_mode = example_SOF_TXTIME_DEADLINE_MODE;
+			//use_deadline_mode = example_SOF_TXTIME_DEADLINE_MODE;
+			use_deadline_mode = SOF_TXTIME_DEADLINE_MODE;
 			break;
 		case 'e':
 			tx_window_offset = strtoul(optarg, NULL, 10);
 			break;
 		case 'E':
-			receive_errors = example_SOF_TXTIME_REPORT_ERRORS;
+			//receive_errors = example_SOF_TXTIME_REPORT_ERRORS;
+			receive_errors = SOF_TXTIME_REPORT_ERRORS;
 			break;
 		case 'f':
 			file_name = strdup(optarg);
