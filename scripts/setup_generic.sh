@@ -1,3 +1,5 @@
+#!/bin/bash
+
 INTERFACE='NULL'
 BOARD='NULL'
 VLAN=0
