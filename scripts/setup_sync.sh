@@ -1,3 +1,5 @@
+#!/bin/bash
+
 INTERFACE='NULL'
 BOARD='NULL'
 DAEMONCL=0
@@ -42,7 +44,7 @@ function start_phc2sys {
 }
 
 function new_terminal {
-	xfce4-terminal --hide-menubar --hide-toolbar -T $1 -e "$2"
+	xterm -e "sudo $2;sleep 800000000;"
 }
 
 function usage {
@@ -104,13 +106,13 @@ fi
 # execute command
 if [ $DAEMONCL -gt 0 ]
 then
-	new_terminal SYNC-DAEMONCL "$(start_daemoncl $INTERFACE $BOARD)"
+	new_terminal SYNC-DAEMONCL "$(start_daemoncl $INTERFACE $BOARD)" &
 	echo 'daemon_cl started.'
 else
-	new_terminal SYNC-PTP4L "$(start_ptp4l $INTERFACE $BOARD)"
+	new_terminal SYNC-PTP4L "$(start_ptp4l $INTERFACE $BOARD)" &
 	echo 'ptp4l started.'
 	echo 'Press Enter to start phc2sys.'
 	read
-	new_terminal SYNC-PHC2SYS "$(start_phc2sys $INTERFACE $BOARD)"
-	echo 'phc2sys started.'
+	new_terminal SYNC-PHC2SYS "$(start_phc2sys $INTERFACE $BOARD)" &
+	echo 'phc2sys started.' 
 fi
