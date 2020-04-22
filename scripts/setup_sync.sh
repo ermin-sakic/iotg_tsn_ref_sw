@@ -44,7 +44,7 @@ function start_phc2sys {
 }
 
 function new_terminal {
-	xterm -e "sudo $2;sleep 800000000;"
+	xterm -e "sudo $2; sleep 800000000;"
 }
 
 function usage {

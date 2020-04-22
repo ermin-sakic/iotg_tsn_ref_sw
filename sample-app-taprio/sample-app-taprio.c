@@ -284,10 +284,10 @@ msg_buff data_rcv;
 /* Window default values */
 #define MAX_WINDOWS_PER_CYCLE (16) /* Max number of windows per cycle */
 #define PACKETS_PER_WINDOW_DEFAULT (1) /* Number of packets per window */
-#define NUM_WINDOW_PER_CYCLE_DEFAULT (2) /* Number of window in one cycle */
-#define CYCLE_TIME_DEFAULT (1000000)		/* TSN cycle time */
+#define NUM_WINDOW_PER_CYCLE_DEFAULT (1) /* Number of window in one cycle */
+#define CYCLE_TIME_DEFAULT (50000)		/* TSN cycle time */
 #define CYCLE_OFFSET (5) /* Base time if no base time provided */
-#define TX_DELAY_DEFAULT (1000000) /* Delay before Launchtime */
+#define TX_DELAY_DEFAULT (50000) /* Delay before Launchtime */
 #define TX_WINDOW_OFFSET (50000) /* Offset delay in window before Launchtime */
 
 /* TSN packet default values */

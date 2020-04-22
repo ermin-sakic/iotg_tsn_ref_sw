@@ -63,6 +63,7 @@ def generate_outfile(filename, data):
     file.close()
 
 def get_qdisc_parent(cmd, token):
+    print("Executing cmd {}".format(cmd))
     output = run_cmd(cmd)
     for item in output.split('\n'):
         if token in item:
@@ -103,6 +104,7 @@ def set_etf(iface, clkid, delta, prio, show_cmd, use_taprio):
         parent = get_qdisc_parent(show_cmd, 'mqprio')
 
     if not parent:
+        print("Not parent")
         exit(1)
 
     # Etf command with deadline mode on. Will be overwritten if specified in map_file
